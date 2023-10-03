@@ -1,34 +1,71 @@
 package ui;
 
-
-import model.*;
-
+import model.Controller;
+import java.util.Scanner;
 
 public class Main {
-    
+
+    private Scanner sc;
+
+    public Main() {
+        sc = new Scanner(System.in);
+        new Controller();
+    }
+
     public static void main(String[] args) {
-        Pilas<Usuario> pila = new Pilas<>();
-        Usuario usuario1 = new Usuario("samuel", "calle 37", "3005314715");
-        Usuario usuaroi2 = new Usuario("Valeria", "puetne", "0");
+        Main obPpal = new Main();
+        int option = 0;
 
+        do {
+            option = obPpal.showMenuAndGetOption();
+            obPpal.answerOption(option);
+        } while (option != 0);
+    }
 
-        pila.push(usuario1);
-        System.out.println(((Usuario)pila.peek()).getNombre());
-        pila.push(usuaroi2);
-        System.out.println(((Usuario)pila.peek()).getNombre());
-        pila.pop();
-        System.out.println(" El objeto (" + ((Usuario)pila.pop()).getNombre() + ") fue eliminado de la lista");
+    public void answerOption(int userOption) {
+        switch (userOption) {
+            case 0:
+                System.out.println("Cerrando la aplicación, bye");
+                break;
+            case 1:
+                // Llamar a la función para agregar una nueva tarea
+                ;
+                break;
+            case 2:
+                // Llamar a la función para ver la lista de tareas
+                ;
+                break;
+            case 3:
+                // Llamar a la función para eliminar una tarea
+                ;
+                break;
+            case 4:
+                // Llamar a la función para marcar una tarea como completada
+                ;
+                break;
+            case 5:
+                // Llamar a la función para deshacer la última acción
+                ;
+                break;
+            default:
+                System.out.println("Opción no válida");
+                break;
+        }
+    }
 
-        System.out.println("Por ende el elemento sobrante es (" + ((Usuario)pila.peek()).getNombre() + ")");
-
-        
-        //Pilas<String> pila = new Pilas<>();
-        //pila.push("hola");
-        //pila.push("total");
-        //System.out.println(pila.peek());
-        //pila.pop();
-        //System.out.println(pila.peek());
-
-
+    public int showMenuAndGetOption() {
+        int input;
+        System.out.println("Sistema de gestión de tareas y recordatorios\n");
+        System.out.println("Bienvenido\n");
+        System.out.println("\n\nMenú de la aplicación, digite una opción\n" +
+                "(1) Agregar nueva tarea\n" +
+                "(2) Ver lista de tareas\n" +
+                "(3) Eliminar tarea\n" +
+                "(4) Marcar tarea como completada\n" +
+                "(5) Deshacer última acción\n" +
+                "(0) Salir\n");
+        input = sc.nextInt();
+        sc.nextLine();
+        return input;
     }
 }
