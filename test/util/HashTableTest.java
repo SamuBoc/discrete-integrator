@@ -1,6 +1,7 @@
 package util;
 
 import org.junit.Test;
+import util.HashTable;
 
 import static org.junit.Assert.*;
 
