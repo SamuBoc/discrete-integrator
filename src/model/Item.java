@@ -3,7 +3,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class Item {
+public class Item  {
 
     private String name;
     private String description;
@@ -86,6 +86,14 @@ public class Item {
         this.dateLimit = dateLimit;
     }
 
+    @Override
+    public String toString(){
 
+        return name+"\n\n"+"Priority Level: "+priorityLevel+"\n\n"+description;
+
+    }
+
+    //priorityLevel.ordinal(); Retorna la posición del enum como en un arreglo...
+    //Super valioso para cuando implementemos comparable...
 
 }
