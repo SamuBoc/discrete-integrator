@@ -49,7 +49,7 @@ public class Main {
                 break;
             case 2:
                 // Llamar a la función para ver la lista de tareas
-                co.test();
+
                 break;
             case 3:
                 // Llamar a la función para eliminar una tarea
