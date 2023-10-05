@@ -6,13 +6,25 @@ import java.util.Scanner;
 public class Main {
 
     private Scanner sc;
+    private Controller co;
+
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_BLACK = "\u001B[30m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_WHITE = "\u001B[37m";
 
     public Main() {
         sc = new Scanner(System.in);
-        new Controller();
+        co = new Controller();
     }
 
     public static void main(String[] args) {
+
         Main obPpal = new Main();
         int option = 0;
 
@@ -21,17 +33,7 @@ public class Main {
             obPpal.answerOption(option);
         } while (option != 0);
 
-    // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
         System.out.printf("Hello and welcome!");
-
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
-
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
-        }
 
     }
 
@@ -42,11 +44,12 @@ public class Main {
                 break;
             case 1:
                 // Llamar a la función para agregar una nueva tarea
+                addNewTask();
                 ;
                 break;
             case 2:
                 // Llamar a la función para ver la lista de tareas
-                ;
+
                 break;
             case 3:
                 // Llamar a la función para eliminar una tarea
@@ -60,6 +63,8 @@ public class Main {
                 // Llamar a la función para deshacer la última acción
                 ;
                 break;
+            case 6:
+                break;
             default:
                 System.out.println("Opción no válida");
                 break;
@@ -71,14 +76,65 @@ public class Main {
         System.out.println("Sistema de gestión de tareas y recordatorios\n");
         System.out.println("Bienvenido\n");
         System.out.println("\n\nMenú de la aplicación, digite una opción\n" +
-                "(1) Agregar nueva tarea\n" +
-                "(2) Ver lista de tareas\n" +
-                "(3) Eliminar tarea\n" +
-                "(4) Marcar tarea como completada\n" +
+                "(1) Agregar nuevo item\n" +
+                "(2) Ver lista\n" +
+                "(3) Eliminar item\n" +
+                "(4) Marcar item como completada\n" +
                 "(5) Deshacer última acción\n" +
                 "(0) Salir\n");
         input = sc.nextInt();
         sc.nextLine();
         return input;
     }
+
+    public void addNewTask() {
+
+        // Clear the console
+        System.out.println("\033[H\033[2J");
+        System.out.flush();
+        System.out.println("\n");
+
+        // Prompt the user to select the type of item
+        System.out.println("Select the type of item: \n 1. Task \n 2. Reminder");
+
+        // Get the user's selection
+        int type = sc.nextInt();
+        sc.nextLine();
+
+        // Prompt the user to enter the name of the item
+        System.out.println("\n Enter the name of the ");
+        String name = sc.nextLine();
+
+        // Prompt the user to enter the description of the item
+        System.out.println("\n Enter the description of the ");
+        String description = sc.nextLine();
+
+        // Prompt the user to enter the priority of the item
+        System.out.println("\n enter the priority");
+        int priority = sc.nextInt();
+
+        sc.nextLine();
+        System.out.println("below you will type the date \n");
+
+        // Prompt the user to enter the day of the due date
+        System.out.println("first enter the day");
+        int day = sc.nextInt();
+
+        sc.nextLine();
+        System.out.println("\n now the month ");
+        int month = sc.nextInt();
+
+        sc.nextLine();
+        System.out.println("\nlast enter the year");
+        int year = sc.nextInt();
+
+        // Create the new item using the `co.createItem()` method
+        co.createItem(type, name, description, priority, day, month, year);
+
+        // Display a success message to the user
+        System.out.println("Your item has been successfully created!");
+
+    }
+
+
 }
