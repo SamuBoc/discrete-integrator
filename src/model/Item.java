@@ -1,21 +1,23 @@
 package model;
-
-import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class Item {
     
     private String name;
     private String description;
-    private int priority;
-    private Date dateLimit;
+    private int priorityNumeric;
+    private Calendar dateLimit;
     private TypeItem typeItem;
+    private PriorityLevel priorityLevel;
 
-    public Item(String name, String description, int priority, Date dateLimit, int typeItem){
+    public Item(String name, String description, int priorityNumeric, Calendar dateLimit, int typeItem, int priorityLevel){
 
         this.name = name;
         this.description = description;
         this.dateLimit = dateLimit;
-        this.priority = priority;
+        this.priorityNumeric = priorityNumeric;
 
         //diferenciador del tipo "tarea(1)" y "recordatorio(2)"
         if(typeItem == 1){
@@ -25,6 +27,7 @@ public class Item {
         }
 
     }
+
 
     public String getName() {
         return name;
@@ -45,25 +48,14 @@ public class Item {
     }
 
 
-    public int getPriority() {
-        return priority;
+    public int getPriorityNumeric() {
+        return priorityNumeric;
     }
 
 
-    public void setPriority(int priority) {
-        this.priority = priority;
+    public void setPriorityNumeric(int priorityNumeric) {
+        this.priorityNumeric = priorityNumeric;
     }
-
-
-    public Date getDateLimit() {
-        return dateLimit;
-    }
-
-
-    public void setDateLimit(Date dateLimit) {
-        this.dateLimit = dateLimit;
-    }
-
 
     public TypeItem getTypeItem() {
         return typeItem;
@@ -74,6 +66,25 @@ public class Item {
         this.typeItem = typeItem;
     }
 
+
+
+    //FIXME preguntar por ennum de prioridad
+    public PriorityLevel getPriorityLevel() {
+        return priorityLevel;
+    }
+    public void setPriorityLevel(PriorityLevel priorityLevel) {
+        this.priorityLevel = priorityLevel;
+    }
+    //FIXME preguar por enum de prioridad
+
+    public String getDateLimit() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MMMM-yyyy");
+        return sdf.format(dateLimit.getTime());
+    }
+
+    public void setDateLimit(Calendar dateLimit) {
+        this.dateLimit = dateLimit;
+    }
 
     
 
