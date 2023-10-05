@@ -49,7 +49,7 @@ public class Main {
                 break;
             case 2:
                 // Llamar a la función para ver la lista de tareas
-
+                co.test();
                 break;
             case 3:
                 // Llamar a la función para eliminar una tarea
@@ -93,48 +93,48 @@ public class Main {
         System.out.println("\033[H\033[2J");
         System.out.flush();
         System.out.println("\n");
-
+    
         // Prompt the user to select the type of item
         System.out.println("Select the type of item: \n 1. Task \n 2. Reminder");
-
+    
         // Get the user's selection
         int type = sc.nextInt();
         sc.nextLine();
-
+    
         // Prompt the user to enter the name of the item
         System.out.println("\n Enter the name of the ");
         String name = sc.nextLine();
-
+    
         // Prompt the user to enter the description of the item
         System.out.println("\n Enter the description of the ");
         String description = sc.nextLine();
-
+    
         // Prompt the user to enter the priority of the item
         System.out.println("\n enter the priority");
         int priority = sc.nextInt();
-
+    
         sc.nextLine();
         System.out.println("below you will type the date \n");
-
+    
         // Prompt the user to enter the day of the due date
         System.out.println("first enter the day");
         int day = sc.nextInt();
-
+    
         sc.nextLine();
         System.out.println("\n now the month ");
         int month = sc.nextInt();
-
+    
         sc.nextLine();
         System.out.println("\nlast enter the year");
         int year = sc.nextInt();
-
+    
         // Create the new item using the `co.createItem()` method
         co.createItem(type, name, description, priority, day, month, year);
-
+    
         // Display a success message to the user
         System.out.println("Your item has been successfully created!");
-
+    
     }
-
+    
 
 }
