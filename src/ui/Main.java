@@ -49,7 +49,7 @@ public class Main {
                 break;
             case 2:
                 // Llamar a la función para ver la lista de tareas
-
+                showMenuViewList();
                 break;
             case 3:
                 // Llamar a la función para eliminar una tarea
@@ -76,15 +76,44 @@ public class Main {
         System.out.println("Sistema de gestión de tareas y recordatorios\n");
         System.out.println("Bienvenido\n");
         System.out.println("\n\nMenú de la aplicación, digite una opción\n" +
-                "(1) Agregar nuevo item\n" +
-                "(2) Ver lista\n" +
-                "(3) Eliminar item\n" +
-                "(4) Marcar item como completada\n" +
-                "(5) Deshacer última acción\n" +
-                "(0) Salir\n");
+                        "(1) Agregar nuevo item \n" +
+                        "(2) Ver lista \n" +
+                        "(3) Eliminar item" +
+                        "(4) Marcar item como completada" +
+                        "(5) Deshacer última acció" +
+                        "(0)Sali");
         input = sc.nextInt();
         sc.nextLine();
         return input;
+    }
+
+    public void showMenuViewList() {
+        int input;
+        boolean flag = false;
+        do {
+            System.out.println("\nMenu de muestras de listas\n" +
+                    "(1) Ver lista por fecha (Ascendente)\n" +
+                    "(2) Ver lista por nivel de prioridad \n \n" +
+                    "(0)Sali");
+            input = sc.nextInt();
+            sc.nextLine();
+
+            switch (input){
+                case 1:
+                    System.out.println(viewListDate());
+                    flag = true;
+                    break;
+                case 2:
+                    System.out.println(viewListPriority());
+                    flag = true;
+                    break;
+                case 0:
+                    System.out.println("Volvera al menu principal \n");
+                    flag = true;
+                    break;
+            }
+
+        } while (!flag);
     }
 
     public void addNewTask() {
@@ -136,5 +165,21 @@ public class Main {
     
     }
     
+    public String viewListDate(){
+        String out = "";
+
+
+        return out;
+    }
+
+    public String viewListPriority(){
+        String out = "";
+
+
+
+        return out;
+    }
+
+
 
 }
