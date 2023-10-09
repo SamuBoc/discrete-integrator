@@ -1,9 +1,11 @@
 package model;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.GregorianCalendar;
 
-public class Item  {
+
+public class Item {
 
     private String name;
     private String description;
@@ -12,7 +14,7 @@ public class Item  {
     private TypeItem typeItem;
     private PriorityLevel priorityLevel;
 
-    public Item(String name, String description, int priorityNumeric, Calendar dateLimit, int typeItem, int priorityLevel){
+    public Item(String name, String description, int priorityNumeric, Calendar dateLimit, int typeItem, int priorityLevel) {
 
         this.name = name;
         this.description = description;
@@ -77,9 +79,13 @@ public class Item  {
     }
     //FIXME preguar por enum de prioridad
 
-    public String getDateLimit() {
+    public String getStringDateLimit() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MMMM-yyyy");
         return sdf.format(dateLimit.getTime());
+    }
+
+    public Calendar getDateLimit() {
+        return dateLimit;
     }
 
     public void setDateLimit(Calendar dateLimit) {
@@ -93,7 +99,34 @@ public class Item  {
 
     }
 
+
+
+
     //priorityLevel.ordinal(); Retorna la posición del enum como en un arreglo...
     //Super valioso para cuando implementemos comparable...
 
+}
+
+class priorityCompare implements Comparator<Item> {
+    public int compare(Item m1, Item m2)
+    {
+        if (m1.getPriorityLevel().ordinal() < m2.getPriorityLevel().ordinal())
+            return -1;
+        if (m1.getPriorityLevel().ordinal() > m2.getPriorityLevel().ordinal())
+            return 1;
+        else
+            return 0;
+    }
+}
+
+class dateCompare implements Comparator<Item> {
+    public int compare(Item m1, Item m2)
+    {
+        if (m1.getDateLimit().compareTo(m2.getDateLimit())<0)
+            return -1;
+        if (m1.getDateLimit().compareTo(m2.getDateLimit())>0)
+            return 1;
+        else
+            return 0;
+    }
 }
