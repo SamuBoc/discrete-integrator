@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/IntegradoraUtil2/IntegradoraUtil2.iml" filepath="$PROJECT_DIR$/IntegradoraUtil2/IntegradoraUtil2.iml" />
-      <module fileurl="file://$PROJECT_DIR$/tests/tests.iml" filepath="$PROJECT_DIR$/tests/tests.iml" />
+      <module fileurl="file://$PROJECT_DIR$/IntegradoraUtil2/discreteIntegrator.iml" filepath="$PROJECT_DIR$/IntegradoraUtil2/discreteIntegrator.iml" />
     </modules>
   </component>
 </project>
