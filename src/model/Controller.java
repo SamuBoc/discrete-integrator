@@ -27,16 +27,15 @@ public Controller(){
         itemPriorityQueueByDate.offer(item);
     }
 
-    public String viewList(){
+    public String viewListDate(){
 
     String out = "";
 
+    for(int i = 0; i < itemPriorityQueueByDate.size(); i++){
 
+    }
 
     return out;
     }
-
-
-
 
 }
