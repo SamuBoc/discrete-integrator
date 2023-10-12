@@ -8,16 +8,6 @@ public class Main {
     private Scanner sc;
     private Controller co;
 
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_BLACK = "\u001B[30m";
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_GREEN = "\u001B[32m";
-    public static final String ANSI_YELLOW = "\u001B[33m";
-    public static final String ANSI_BLUE = "\u001B[34m";
-    public static final String ANSI_PURPLE = "\u001B[35m";
-    public static final String ANSI_CYAN = "\u001B[36m";
-    public static final String ANSI_WHITE = "\u001B[37m";
-
     public Main() {
         sc = new Scanner(System.in);
         co = new Controller();
@@ -180,6 +170,55 @@ public class Main {
 
         return out;
     }
+
+    public void editTask() {
+        System.out.println("Ingrese el nombre del elemento que desea editar: ");
+        String itemName = sc.nextLine();
+
+        // Verificar si el elemento existe en el hashTable antes de editarlo
+        if (co.itemExists(itemName)) {
+            System.out.println("Ingrese el nuevo nombre: ");
+            String newName = sc.nextLine();
+
+            System.out.println("Ingrese la nueva descripción: ");
+            String newDescription = sc.nextLine();
+
+            System.out.println("Ingrese la nueva prioridad: ");
+            int newPriority = sc.nextInt();
+            sc.nextLine();
+
+            System.out.println("Ingrese la nueva fecha de vencimiento (día): ");
+            int newDay = sc.nextInt();
+            sc.nextLine();
+
+            System.out.println("Ingrese la nueva fecha de vencimiento (mes): ");
+            int newMonth = sc.nextInt();
+            sc.nextLine();
+
+            System.out.println("Ingrese la nueva fecha de vencimiento (año): ");
+            int newYear = sc.nextInt();
+            sc.nextLine();
+
+            co.modifyItem(itemName, newName, newDescription, newPriority, newDay, newMonth, newYear);
+            System.out.println("Elemento editado exitosamente.");
+        } else {
+            System.out.println("El elemento no existe.");
+        }
+    }
+
+    public void deleteTask() {
+        System.out.println("Ingrese el nombre del elemento que desea eliminar: ");
+        String itemName = sc.nextLine();
+
+        // Verificar si el elemento existe en el hashTable antes de eliminarlo
+        if (co.itemExists(itemName)) {
+            co.deleteItem(itemName);
+            System.out.println("Elemento eliminado exitosamente.");
+        } else {
+            System.out.println("El elemento no existe.");
+        }
+    }
+
 
 
 
