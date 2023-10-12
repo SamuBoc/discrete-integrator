@@ -46,18 +46,6 @@ private PriorityQueue<Item> itemPriorityQueueByPriority;
     return out;
     }
 
-    public void eliminateItem(int position){
-
-
-        //createAction(2, item);
-    }
-
-    public void modifyItem(){
-        //createAction(1, item);
-
-
-    }
-
 
     public void createAction(int type, Item item) {
 
@@ -67,6 +55,7 @@ private PriorityQueue<Item> itemPriorityQueueByPriority;
 
     }
 
+    //llama los metodos perdinentes para la stack
     public void undo() {
         Action lastAction = undoStack.pop();
         Item item = lastAction.getItem();
@@ -82,6 +71,7 @@ private PriorityQueue<Item> itemPriorityQueueByPriority;
         }
     }
 
+    //elimina el ultimo item agregado
     private void stackDelet(Item item) {
 
         int type = item.getTypeItem() == TypeItem.Homework ? 1 : 2;
@@ -97,15 +87,34 @@ private PriorityQueue<Item> itemPriorityQueueByPriority;
 
     }
 
+    //modifica el ultimo item que modifico
     private void stackModify(Item originalItem) {
 
 
 
     }
 
+    //agrega el item, si la ultima accion fue eliminar
     private void stackAdd(Item item){
 
 
+
+    }
+
+
+    //verifica si el item existe
+    public boolean itemExists(String item){
+
+
+        return false;
+    }
+
+    //elimina el item
+    public void deleteItem(String item){
+
+    }
+
+    public void modifyItem(String itemName, String newName, String newDescription, int newPriority, int newDay, int newMonth, int newYear) {
 
     }
 
