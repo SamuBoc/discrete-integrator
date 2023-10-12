@@ -64,12 +64,22 @@ private PriorityQueue<Item> itemPriorityQueueByPriority;
             ActionType actionType = lastAction.getActionType();
 
             switch (actionType) {
-                case ADD_TASK -> stackDelet(item);
-                case MODIFY_TASK -> stackModify(item);
-                case DELETE_TASK -> stackAdd(item);
+                case ADD_TASK:
+                    stackDelet(item);
+                    break;
+                case MODIFY_TASK:
+                    stackModify(item);
+                    break;
+                case DELETE_TASK:
+                    stackAdd(item);
+                    break;
+                default:
+                    // Manejar caso predeterminado si es necesario
+                    break;
             }
         }
     }
+
 
     //elimina el ultimo item agregado
     private void stackDelet(Item item) {
