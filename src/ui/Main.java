@@ -84,7 +84,8 @@ public class Main {
             System.out.println("\nMenu de muestras de listas\n" +
                     "(1) Ver lista por fecha (Ascendente)\n" +
                     "(2) Ver lista por nivel de prioridad \n \n" +
-                    "(0)Sali");
+                    "(3) Ver lista por subdivisiones \n \n" +
+                    "(0)Salir");
             input = sc.nextInt();
             sc.nextLine();
 
@@ -95,6 +96,10 @@ public class Main {
                     break;
                 case 2:
                     System.out.println(viewListPriority());
+                    flag = true;
+                    break;
+                case 3:
+                    System.out.println(showItems());
                     flag = true;
                     break;
                 case 0:
@@ -158,7 +163,7 @@ public class Main {
     public String viewListDate(){
         String out = "";
 
-        //co
+        out=co.getItemsByDate();
 
         return out;
     }
@@ -166,26 +171,40 @@ public class Main {
     public String viewListPriority(){
         String out = "";
 
-
+        out=co.getItemsByPriority();
 
         return out;
     }
 
+    public String showItems(){
+
+        String out = "";
+
+        out=co.showItems();
+
+        return out;
+
+    }
+
     public void editTask() {
-        System.out.println("Ingrese el nombre del elemento que desea editar: ");
-        String itemName = sc.nextLine();
+
+        System.out.println(showItems());
+        System.out.println("Ingrese el numero de subdivisión");
+        int subDivision= sc.nextInt();
+        System.out.println("Ingrese el numero de la lista de la subdivisión que escojió");
+        int num= sc.nextInt();
+
+
 
         // Verificar si el elemento existe en el hashTable antes de editarlo
-        if (co.itemExists(itemName)) {
+        if (co.itemExists(subDivision,num)) {
             System.out.println("Ingrese el nuevo nombre: ");
             String newName = sc.nextLine();
 
             System.out.println("Ingrese la nueva descripción: ");
             String newDescription = sc.nextLine();
 
-            System.out.println("Ingrese la nueva prioridad: ");
-            int newPriority = sc.nextInt();
-            sc.nextLine();
+
 
             System.out.println("Ingrese la nueva fecha de vencimiento (día): ");
             int newDay = sc.nextInt();
@@ -199,7 +218,7 @@ public class Main {
             int newYear = sc.nextInt();
             sc.nextLine();
 
-            co.modifyItem(itemName, newName, newDescription, newPriority, newDay, newMonth, newYear);
+            co.modifyItem(newName, newDescription, newDay, newMonth, newYear,subDivision,num);
             System.out.println("Elemento editado exitosamente.");
         } else {
             System.out.println("El elemento no existe.");
@@ -207,12 +226,15 @@ public class Main {
     }
 
     public void deleteTask() {
-        System.out.println("Ingrese el nombre del elemento que desea eliminar: ");
-        String itemName = sc.nextLine();
+        System.out.println(showItems());
+        System.out.println("Ingrese el numero de subdivisión");
+        int subDivision= sc.nextInt();
+        System.out.println("Ingrese el numero de la lista de la subdivisión que escojió");
+        int num= sc.nextInt();
 
         // Verificar si el elemento existe en el hashTable antes de eliminarlo
-        if (co.itemExists(itemName)) {
-            co.deleteItem(itemName);
+        if (co.itemExists(subDivision,num)) {
+            co.deleteItem(subDivision,num);
             System.out.println("Elemento eliminado exitosamente.");
         } else {
             System.out.println("El elemento no existe.");
