@@ -8,16 +8,6 @@ public class Main {
     private Scanner sc;
     private Controller co;
 
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_BLACK = "\u001B[30m";
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_GREEN = "\u001B[32m";
-    public static final String ANSI_YELLOW = "\u001B[33m";
-    public static final String ANSI_BLUE = "\u001B[34m";
-    public static final String ANSI_PURPLE = "\u001B[35m";
-    public static final String ANSI_CYAN = "\u001B[36m";
-    public static final String ANSI_WHITE = "\u001B[37m";
-
     public Main() {
         sc = new Scanner(System.in);
         co = new Controller();
@@ -49,7 +39,7 @@ public class Main {
                 break;
             case 2:
                 // Llamar a la función para ver la lista de tareas
-
+                showMenuViewList();
                 break;
             case 3:
                 // Llamar a la función para eliminar una tarea
@@ -76,15 +66,44 @@ public class Main {
         System.out.println("Sistema de gestión de tareas y recordatorios\n");
         System.out.println("Bienvenido\n");
         System.out.println("\n\nMenú de la aplicación, digite una opción\n" +
-                "(1) Agregar nuevo item\n" +
-                "(2) Ver lista\n" +
-                "(3) Eliminar item\n" +
-                "(4) Marcar item como completada\n" +
-                "(5) Deshacer última acción\n" +
-                "(0) Salir\n");
+                        "(1) Agregar nuevo item \n" +
+                        "(2) Ver lista \n" +
+                        "(3) Eliminar item" +
+                        "(4) Marcar item como completada" +
+                        "(5) Deshacer última acció" +
+                        "(0)Sali");
         input = sc.nextInt();
         sc.nextLine();
         return input;
+    }
+
+    public void showMenuViewList() {
+        int input;
+        boolean flag = false;
+        do {
+            System.out.println("\nMenu de muestras de listas\n" +
+                    "(1) Ver lista por fecha (Ascendente)\n" +
+                    "(2) Ver lista por nivel de prioridad \n \n" +
+                    "(0)Sali");
+            input = sc.nextInt();
+            sc.nextLine();
+
+            switch (input){
+                case 1:
+                    System.out.println(viewListDate());
+                    flag = true;
+                    break;
+                case 2:
+                    System.out.println(viewListPriority());
+                    flag = true;
+                    break;
+                case 0:
+                    System.out.println("Volvera al menu principal \n");
+                    flag = true;
+                    break;
+            }
+
+        } while (!flag);
     }
 
     public void addNewTask() {
@@ -136,5 +155,71 @@ public class Main {
     
     }
     
+    public String viewListDate(){
+        String out = "";
+
+        //co
+
+        return out;
+    }
+
+    public String viewListPriority(){
+        String out = "";
+
+
+
+        return out;
+    }
+
+    public void editTask() {
+        System.out.println("Ingrese el nombre del elemento que desea editar: ");
+        String itemName = sc.nextLine();
+
+        // Verificar si el elemento existe en el hashTable antes de editarlo
+        if (co.itemExists(itemName)) {
+            System.out.println("Ingrese el nuevo nombre: ");
+            String newName = sc.nextLine();
+
+            System.out.println("Ingrese la nueva descripción: ");
+            String newDescription = sc.nextLine();
+
+            System.out.println("Ingrese la nueva prioridad: ");
+            int newPriority = sc.nextInt();
+            sc.nextLine();
+
+            System.out.println("Ingrese la nueva fecha de vencimiento (día): ");
+            int newDay = sc.nextInt();
+            sc.nextLine();
+
+            System.out.println("Ingrese la nueva fecha de vencimiento (mes): ");
+            int newMonth = sc.nextInt();
+            sc.nextLine();
+
+            System.out.println("Ingrese la nueva fecha de vencimiento (año): ");
+            int newYear = sc.nextInt();
+            sc.nextLine();
+
+            co.modifyItem(itemName, newName, newDescription, newPriority, newDay, newMonth, newYear);
+            System.out.println("Elemento editado exitosamente.");
+        } else {
+            System.out.println("El elemento no existe.");
+        }
+    }
+
+    public void deleteTask() {
+        System.out.println("Ingrese el nombre del elemento que desea eliminar: ");
+        String itemName = sc.nextLine();
+
+        // Verificar si el elemento existe en el hashTable antes de eliminarlo
+        if (co.itemExists(itemName)) {
+            co.deleteItem(itemName);
+            System.out.println("Elemento eliminado exitosamente.");
+        } else {
+            System.out.println("El elemento no existe.");
+        }
+    }
+
+
+
 
 }

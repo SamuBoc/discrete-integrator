@@ -43,6 +43,28 @@ public class LinkedListRecursive<T> implements List<T>{
         return found;
     }
 
+
+    public T searchWithId(int clave) {
+        T content =null;
+
+        if (!isEmpty())
+            content = searchInSequenceWithId(first, clave-1);
+
+        return content;
+    }
+
+    private T searchInSequenceWithId(NodeDouble<T> sq, int clave) {
+        T found = null;
+
+        if(sq!=null)
+            if (sq.getId()==clave)
+                found = sq.getContent();
+            else
+                found= searchInSequenceWithId((NodeDouble<T>)sq.getNext(), clave);
+
+        return found;
+    }
+
     public T getObject(T clave) {
         T content =null;
 
@@ -79,19 +101,19 @@ public class LinkedListRecursive<T> implements List<T>{
             out+= "Nothing here!";
         }
         else{
-            out+= printSequence(first);
+            out+= printSequence(first,1);
         }
 
         return out ;
     }
 
-    private String printSequence(Node<T> node) {
+    private String printSequence(Node<T> node, int n) {
         String out="";
 
         if (node==null) {
             out= "";
         }else
-            out = node.getContent() + "\n"+printSequence(node.getNext());
+            out = n+". "+node.getContent() + "\n"+printSequence(node.getNext(),n+1);
 
         return out;
     }
@@ -127,7 +149,8 @@ public class LinkedListRecursive<T> implements List<T>{
 
     @Override
     public void addFirst(T n) {
-        NodeDouble<T> newNode= new NodeDouble<>(n);
+        int f=0;
+        NodeDouble<T> newNode= new NodeDouble<>(n,f);
 
         if(first ==null) {// empty list
             first =newNode;
@@ -136,12 +159,17 @@ public class LinkedListRecursive<T> implements List<T>{
             newNode.setNext(first);
             first.setPrev(newNode);
             first= newNode;
+            while(newNode.hasNext()){
+                f++;
+                newNode=(NodeDouble<T>)newNode.getNext();
+                newNode.setId(f);
+            }
         }
         numItems++;
 
     }
 
-    public Object getSize(){
+    public int getSize(){
 
         return numItems;
 
@@ -149,7 +177,7 @@ public class LinkedListRecursive<T> implements List<T>{
 
     @Override
     public void addLast(T n) {
-        NodeDouble<T> newNode= new NodeDouble<>(n);
+        NodeDouble<T> newNode= new NodeDouble<>(n,numItems);
 
         if(last ==null) {// empty list
             first =newNode;
