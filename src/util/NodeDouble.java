@@ -8,8 +8,8 @@ public class NodeDouble<T> extends NodeSingle<T>{
      *
      * @param c es un objeto, el contenido del nodo
      */
-    public NodeDouble(T c) {
-        super(c);
+    public NodeDouble(T c, int id) {
+        super(c,id);
     }
 
     public NodeSingle<T> getPrev() {
