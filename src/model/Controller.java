@@ -35,6 +35,46 @@ private PriorityQueue<Item> itemPriorityQueueByPriority;
 
     }
 
+    public String getItemsByDate(){
+        PriorityQueue<Item> newDatePriorityQueue = new PriorityQueue<>(new dateCompare());
+        Item currentItem;
+        String out="The items organized by date are: ";
+        while(!itemPriorityQueueByDate.isEmpty()){
+            currentItem = itemPriorityQueueByDate.poll();
+            out+="\n"+currentItem.toString();
+            newDatePriorityQueue.offer(currentItem);
+
+        }
+        while(!newDatePriorityQueue.isEmpty()){
+
+            itemPriorityQueueByDate.offer(newDatePriorityQueue.poll());
+
+        }
+
+        return out;
+
+    }
+
+    public String getItemsByPriority(){
+        PriorityQueue<Item> newPriorityPriorityQueue = new PriorityQueue<>(new dateCompare());
+        Item currentItem;
+        String out="The items organized by priority are: ";
+        while(!itemPriorityQueueByPriority.isEmpty()){
+            currentItem = itemPriorityQueueByPriority.poll();
+            out+="\n"+currentItem.toString();
+            newPriorityPriorityQueue.offer(currentItem);
+
+        }
+        while(!newPriorityPriorityQueue.isEmpty()){
+
+            itemPriorityQueueByPriority.offer(newPriorityPriorityQueue.poll());
+
+        }
+
+        return out;
+
+    }
+
     public String viewListDate(){
 
     String out = "";
@@ -64,7 +104,7 @@ private PriorityQueue<Item> itemPriorityQueueByPriority;
             ActionType actionType = lastAction.getActionType();
 
             switch (actionType) {
-                case ADD_TASK -> stackDelet(item);
+                case ADD_TASK -> stackDelete(item);
                 case MODIFY_TASK -> stackModify(item);
                 case DELETE_TASK -> stackAdd(item);
             }
@@ -72,7 +112,7 @@ private PriorityQueue<Item> itemPriorityQueueByPriority;
     }
 
     //elimina el ultimo item agregado
-    private void stackDelet(Item item) {
+    private void stackDelete(Item item) {
 
         int type = item.getTypeItem() == TypeItem.Homework ? 1 : 2;
         String name = item.getName();
@@ -103,18 +143,44 @@ private PriorityQueue<Item> itemPriorityQueueByPriority;
 
 
     //verifica si el item existe
-    public boolean itemExists(String item){
+    public boolean itemExists(int s, int i){
 
+        if(!itemHashTable.search(s,i).equals(null)){
+
+            return true;
+
+        }
 
         return false;
     }
 
     //elimina el item
-    public void deleteItem(String item){
+    public void deleteItem(int hashPointer, int linekdListPointer){
+
+        Item currentItem = itemHashTable.search(hashPointer,linekdListPointer);
+        //FIXME Pense que ibas a crearle un enum de deleted a los Items, pero hiciste una clase Action que nose como funciona
+        //FIXME Haría esto yo pero no sé cómo si no tiene un enum que yo pueda modificar
+        //FIXME Con el modifyItem() tienes una idea de como lo puedes hacer, e implementas lo que creasete :D
 
     }
 
-    public void modifyItem(String itemName, String newName, String newDescription, int newPriority, int newDay, int newMonth, int newYear) {
+    public void modifyItem( String newName, String newDescription, int newDay, int newMonth, int newYear, int hashPointer, int linekdListPointer) {
+        GregorianCalendar calendar = new GregorianCalendar(newYear, newMonth-1, newDay);
+        Item currentItem = itemHashTable.search(hashPointer,linekdListPointer);
+        currentItem.setName(newName);
+        currentItem.setDescription(newDescription);
+        currentItem.setDateLimit(calendar);
+    }
+
+    public String searchItemToString(int hashPointer, int linekdListPointer){
+
+        return itemHashTable.search(hashPointer,linekdListPointer).toString();
+
+    }
+
+    public String showItems(){
+
+        return itemHashTable.showTable();
 
     }
 
