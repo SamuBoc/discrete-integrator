@@ -31,7 +31,7 @@ private PriorityQueue<Item> itemPriorityQueueByPriority;
         itemPriorityQueueByPriority.offer(item);
         itemPriorityQueueByDate.offer(item);
 
-        createAction(0, item);
+        createAction(0, item, null);
 
     }
 
@@ -87,9 +87,9 @@ private PriorityQueue<Item> itemPriorityQueueByPriority;
     }
 
 
-    public void createAction(int type, Item item) {
+    public void createAction(int type, Item item, Item newItem) {
 
-        Action action = new Action(type, item);
+        Action action = new Action(type, item, newItem);
 
         undoStack.push(action);
 
@@ -104,13 +104,14 @@ private PriorityQueue<Item> itemPriorityQueueByPriority;
             Action lastAction = undoStack.pop();
             Item item = lastAction.getItem();
             ActionType actionType = lastAction.getActionType();
+            Item newItem = lastAction.getNewItem();
 
             switch (actionType) {
                 case ADD_TASK:
                     stackDelete(item);
                     break;
                 case MODIFY_TASK:
-                    stackModify(item);
+                    stackModify(item, newItem);
                     break;
                 case DELETE_TASK:
                     stackAdd(item);
@@ -131,9 +132,11 @@ private PriorityQueue<Item> itemPriorityQueueByPriority;
     }
 
     //modifica el ultimo item que modifico
-    private void stackModify(Item originalItem) {
+    private void stackModify(Item originalItem, Item newItem) {
 
+        //K key, V oldValue, V newValue
 
+        itemHashTable.editElement(originalItem.getName(), newItem, originalItem);
 
     }
 
@@ -157,14 +160,7 @@ private PriorityQueue<Item> itemPriorityQueueByPriority;
 
     //verifica si el item existe
     public boolean itemExists(int s, int i){
-
-        if(!itemHashTable.search(s,i).equals(null)){
-
-            return true;
-
-        }
-
-        return false;
+        return itemHashTable.search(s, i) != null;
     }
 
     //elimina el item
@@ -174,21 +170,30 @@ private PriorityQueue<Item> itemPriorityQueueByPriority;
 
         itemHashTable.removeElement(currentItem.getName(), currentItem);
 
-        createAction(2, currentItem);
+        createAction(2, currentItem, null);
 
 
     }
 
     public void modifyItem( String newName, String newDescription, int newDay, int newMonth, int newYear, int hashPointer, int linekdListPointer) {
         GregorianCalendar calendar = new GregorianCalendar(newYear, newMonth-1, newDay);
+
+        //creacion de la action, item antiguo, e item nuevo para editar (currentItem)
         Item currentItem = itemHashTable.search(hashPointer,linekdListPointer);
+        Action action = new Action(1, currentItem, null);
+        Item item = itemHashTable.search(hashPointer, linekdListPointer);
+
+        //crea la accion primero
+
         currentItem.setName(newName);
         currentItem.setDescription(newDescription);
         currentItem.setDateLimit(calendar);
 
-        Item newItem = itemHashTable.search(hashPointer, linekdListPointer);
+        //K key, V oldValue, V newValue
 
+        itemHashTable.editElement(item.getName(), item, currentItem);
 
+        createAction(1, currentItem, item);
 
     }
 

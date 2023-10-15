@@ -58,22 +58,16 @@ public class HashTableTest {
 
         // Agregar algunos elementos a la tabla
         hashTable.addElement("Karen", "Karen es un dinosaurio pastuso y pendiente");
-        hashTable.addElement("Karem", "Karen es un dinosaurio pastuso y pendiente");
-        hashTable.addElement("OptimusPrime", "Optimus es un robot gigante");
         hashTable.addElement("Serpiente", "Las serpientes son peligrosas");
-        hashTable.addElement("Permiso", "Si no me das un permiso corremos peligro!");
-        hashTable.addElement("Karee", "Karen es un dinosaurio pastuso y pendiente");
-        hashTable.addElement("Kares", "Karen es un dinosaurio pastuso y pendiente");
-        hashTable.addElement("OptimusPrimes", "Optimus es un robot gigante");
-        hashTable.addElement("Serpientes", "Las serpientes son peligrosas");
-        hashTable.addElement("Permisos", "Si no me das un permiso corremos peligro!");
 
         // Mostrar la tabla
         System.out.println(hashTable.showTable());
 
         // Editar algunos elementos de la tabla
-        assertTrue(hashTable.editElement("Karen", "Karen es un dinosaurio pastuso y pendiente", "sin valor antiguo"));
-        assertTrue(hashTable.editElement("Serpiente", "Las serpientes son peligrosas", "Las serpientes son animales fascinantes"));
+        assertTrue(hashTable.editElement("Karen", "Karen es un dinosaurio pastuso y pendiente", "prueba de cambio"));
+        assertTrue(hashTable.editElement("Serpiente", "Las serpientes son peligrosas", "test para cambio"));
+
+        System.out.println("\n EDITADOS \n");
 
         // Mostrar la tabla actualizada
         System.out.println(hashTable.showTable());

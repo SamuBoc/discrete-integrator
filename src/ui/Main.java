@@ -57,6 +57,7 @@ public class Main {
                 ;
                 break;
             case 6:
+                editTask();
                 break;
             default:
                 System.out.println("Opción no válida");
@@ -202,6 +203,7 @@ public class Main {
 
         // Verificar si el elemento existe en el hashTable antes de editarlo
         if (co.itemExists(subDivision,num)) {
+            sc.nextLine();
             System.out.println("Ingrese el nuevo nombre: ");
             String newName = sc.nextLine();
 
