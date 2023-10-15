@@ -38,19 +38,17 @@ public class HashTableTest {
 
         // Agregar algunos elementos a la tabla
         hashTable.addElement("Karen", "Karen es un dinosaurio pastuso y pendiente");
-        hashTable.addElement("Karem", "Karen es un dinosaurio pastuso y pendiente");
-        hashTable.addElement("OptimusPrime", "Optimus es un robot gigante");
         hashTable.addElement("Serpiente", "Las serpientes son peligrosas");
-        hashTable.addElement("Permiso", "Si no me das un permiso corremos peligro!");
-        hashTable.addElement("Karee", "Karen es un dinosaurio pastuso y pendiente");
-        hashTable.addElement("Kares", "Karen es un dinosaurio pastuso y pendiente");
-        hashTable.addElement("OptimusPrimes", "Optimus es un robot gigante");
-        hashTable.addElement("Serpientes", "Las serpientes son peligrosas");
-        hashTable.addElement("Permisos", "Si no me das un permiso corremos peligro!");
+
+        System.out.println(hashTable.showTable());
 
         // Eliminar algunos elementos de la tabla
         assertTrue(hashTable.removeElement("Karen", "Karen es un dinosaurio pastuso y pendiente"));
         assertTrue(hashTable.removeElement("Serpiente", "Las serpientes son peligrosas"));
+
+        System.out.println("ELIMINADOS");
+
+        System.out.println(hashTable.showTable());
 
     }
 

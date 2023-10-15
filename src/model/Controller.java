@@ -96,16 +96,18 @@ private PriorityQueue<Item> itemPriorityQueueByPriority;
     }
 
     //llama los metodos perdinentes para la stack
-    public void undo() {
-        Action lastAction = undoStack.pop();
-        Item item = lastAction.getItem();
+    public Boolean undo() {
+        Boolean out = false;
 
         if (!undoStack.isEmpty()) {
+            out = true;
+            Action lastAction = undoStack.pop();
+            Item item = lastAction.getItem();
             ActionType actionType = lastAction.getActionType();
 
             switch (actionType) {
                 case ADD_TASK:
-                    stackDelet(item);
+                    stackDelete(item);
                     break;
                 case MODIFY_TASK:
                     stackModify(item);
@@ -116,25 +118,15 @@ private PriorityQueue<Item> itemPriorityQueueByPriority;
             }
 
         }
+
+        return out;
     }
 
-    private void stackDelet(Item item) {
-
-    }
 
     //elimina el ultimo item agregado
     private void stackDelete(Item item) {
 
-        int type = item.getTypeItem() == TypeItem.Homework ? 1 : 2;
-        String name = item.getName();
-        String description = item.getDescription();
-        int priority = item.getPriorityNumeric();
-        Calendar date = item.getDateLimit();
-        int day = date.get(Calendar.DAY_OF_MONTH);
-        int month = date.get(Calendar.MONTH) + 1; // Se suma 1 porque en Calendar enero es 0
-        int year = date.get(Calendar.YEAR);
-
-        createItem(type, name, description, priority, day, month, year);
+        itemHashTable.removeElement(item.getName(), item);
 
     }
 
@@ -148,9 +140,16 @@ private PriorityQueue<Item> itemPriorityQueueByPriority;
     //agrega el item, si la ultima accion fue eliminar
     private void stackAdd(Item item){
 
-        //searchItemToItem(hashPointer, linekdListPointer);
+        int type = item.getTypeItem() == TypeItem.Homework ? 1 : 2;
+        String name = item.getName();
+        String description = item.getDescription();
+        int priority = item.getPriorityNumeric();
+        Calendar date = item.getDateLimit();
+        int day = date.get(Calendar.DAY_OF_MONTH);
+        int month = date.get(Calendar.MONTH) + 1; // Se suma 1 porque en Calendar enero es 0
+        int year = date.get(Calendar.YEAR);
 
-
+        createItem(type, name, description, priority, day, month, year);
 
 
     }
@@ -175,6 +174,9 @@ private PriorityQueue<Item> itemPriorityQueueByPriority;
 
         itemHashTable.removeElement(currentItem.getName(), currentItem);
 
+        createAction(2, currentItem);
+
+
     }
 
     public void modifyItem( String newName, String newDescription, int newDay, int newMonth, int newYear, int hashPointer, int linekdListPointer) {
@@ -183,6 +185,11 @@ private PriorityQueue<Item> itemPriorityQueueByPriority;
         currentItem.setName(newName);
         currentItem.setDescription(newDescription);
         currentItem.setDateLimit(calendar);
+
+        Item newItem = itemHashTable.search(hashPointer, linekdListPointer);
+
+
+
     }
 
     public String searchItemToString(int hashPointer, int linekdListPointer){

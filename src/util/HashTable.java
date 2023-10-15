@@ -100,9 +100,6 @@ public class HashTable<K,V> {
 
     }
 
-
-
-
     public boolean editElement(K key, V oldValue, V newValue) {
         int placement = 0;
         if (key instanceof String) {

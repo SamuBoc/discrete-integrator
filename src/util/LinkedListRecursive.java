@@ -91,35 +91,31 @@ public class LinkedListRecursive<T> implements List<T>{
 
 
     public boolean delete(T clave) {
-        T t = search(clave);
-
-        Node<T> current = first;
-        Node<T> previous = null;
-        Node<T> nodeToDelete = null;
+        NodeDouble<T> current = first;
+        NodeDouble<T> previous = null;
 
         while (current != null) {
-            if (current.getContent().equals(t)) {
-                nodeToDelete = current;
-                break;
+            if (current.getContent().equals(clave)) {
+                if (previous == null) {
+                    first = (NodeDouble<T>) current.getNext();
+                } else {
+                    previous.setNext(current.getNext());
+                }
+
+                if (current.getNext() == null) {
+                    last = previous;
+                }
+
+                return true;
             }
 
             previous = current;
-            current = current.getNext();
+            current = (NodeDouble<T>) current.getNext();
         }
 
-        if (nodeToDelete != null) {
-            if (previous == null) {
-                first = (NodeDouble<T>) nodeToDelete.getNext();
-            } else {
-                previous.setNext(nodeToDelete.getNext());
-            }
-
-            if (nodeToDelete.getNext() == null) {
-                last = (NodeDouble<T>) previous;
-            }
-        }
-        return true;
+        return false;
     }
+
 
 
     public String print(){

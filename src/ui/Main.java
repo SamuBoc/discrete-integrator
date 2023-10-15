@@ -43,14 +43,17 @@ public class Main {
                 break;
             case 3:
                 // Llamar a la función para eliminar una tarea
+                deleteTask();
                 ;
                 break;
             case 4:
                 // Llamar a la función para marcar una tarea como completada
+                completeItem();
                 ;
                 break;
             case 5:
                 // Llamar a la función para deshacer la última acción
+                undoAction();
                 ;
                 break;
             case 6:
@@ -71,6 +74,7 @@ public class Main {
                         "(3) Eliminar item \n" +
                         "(4) Marcar item como completada \n" +
                         "(5) Deshacer última acció \n" +
+                        "(6) Modificar tarea \n" +
                         "(0)Sali");
         input = sc.nextInt();
         sc.nextLine();
@@ -225,12 +229,32 @@ public class Main {
         }
     }
 
-    public void deleteTask() {
-        System.out.println(viewListDate());
+    public void completeItem() {
+        System.out.println(showItems());
         System.out.println("Ingrese el numero de subdivisión");
         int subDivision= sc.nextInt();
         System.out.println("Ingrese el numero de la lista de la subdivisión que escojió");
         int num= sc.nextInt();
+
+        sc.nextLine();
+
+        // Verificar si el elemento existe en el hashTable antes de eliminarlo
+        if (co.itemExists(subDivision,num)) {
+            co.deleteItem(subDivision,num);
+            System.out.println("Elemento terminado con exitosamente.");
+        } else {
+            System.out.println("El elemento no existe.");
+        }
+    }
+
+    public void deleteTask() {
+        System.out.println(showItems());
+        System.out.println("Ingrese el numero de subdivisión");
+        int subDivision= sc.nextInt();
+        System.out.println("Ingrese el numero de la lista de la subdivisión que escojió");
+        int num= sc.nextInt();
+
+        sc.nextLine();
 
         // Verificar si el elemento existe en el hashTable antes de eliminarlo
         if (co.itemExists(subDivision,num)) {
@@ -241,7 +265,16 @@ public class Main {
         }
     }
 
+    public void undoAction(){
 
+        System.out.println("\n");
 
+        if(co.undo()){
+            System.out.println("Su accion fue deshecha con exito \n");
+        }else{
+            System.out.println("No tiene ninguna accion para deshacer \n");
+        }
+
+    }
 
 }
