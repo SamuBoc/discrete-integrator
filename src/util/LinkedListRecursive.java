@@ -8,6 +8,7 @@ public class LinkedListRecursive<T> implements List<T>{
 
 
 
+
     public LinkedListRecursive() {
 
         numItems= 0;
@@ -89,11 +90,33 @@ public class LinkedListRecursive<T> implements List<T>{
 
 
 
-    @Override
-    public void delete(Object clave) {
-        // TODO Auto-generated method stub
+    public boolean delete(T clave) {
+        NodeDouble<T> current = first;
+        NodeDouble<T> previous = null;
 
+        while (current != null) {
+            if (current.getContent().equals(clave)) {
+                if (previous == null) {
+                    first = (NodeDouble<T>) current.getNext();
+                } else {
+                    previous.setNext(current.getNext());
+                }
+
+                if (current.getNext() == null) {
+                    last = previous;
+                }
+
+                return true;
+            }
+
+            previous = current;
+            current = (NodeDouble<T>) current.getNext();
+        }
+
+        return false;
     }
+
+
 
     public String print(){
         String out="";
@@ -212,4 +235,26 @@ public class LinkedListRecursive<T> implements List<T>{
         }
     }
 
+    public boolean edit(T oldValue, T newValue) {
+        NodeDouble<T> current = first;
+
+        while (current != null) {
+            if (current.getContent().equals(oldValue)) {
+                current.setContent(newValue);
+                return true;
+            }
+
+            current = (NodeDouble<T>) current.getNext();
+        }
+
+        return false;
+    }
+
+
+
+
+
 }
+
+
+

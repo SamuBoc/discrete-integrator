@@ -6,6 +6,6 @@ public interface List<T> {
     public void addFirst(T n);
     public void addLast(T n);
     public T search(T clave);
-    public void delete(T clave);
+    public boolean delete(T clave);
 
 }
