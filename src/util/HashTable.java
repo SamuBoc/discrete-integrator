@@ -49,11 +49,7 @@ public HashTable(){
     }
 
     public int stringSlotFinder(String name){
-        int press;
-
-        int hashName=name.hashCode();
-        press=hashName%hashTable.length;
-        return press;
+        return Math.abs(name.hashCode()%hashTable.length);
     }
 
     public int kM(double key, int m){
@@ -71,12 +67,18 @@ public HashTable(){
     public String showTable(){
         String print="";
         for (int i = 0; i < hashTable.length; i++) {
-
-            print+=hashTable[i].print()+"\n\n";
+            print+="Subdivision "+(i+1)+"\n";
+            print+="\n"+hashTable[i].print()+"\n\n";
 
         }
 
     return print;
+    }
+
+    public V search(int keyMajor, int keyMinor){
+
+    return hashTable[keyMajor-1].searchWithId(keyMinor);
+
     }
 
 

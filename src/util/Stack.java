@@ -13,7 +13,7 @@ public class Stack<T> {
 
     // Agrega un elemento colocándolo como nuevo nodo superior
     public void push(T data) {
-        NodeDouble<T> newNode = new NodeDouble<>(data);
+        NodeDouble<T> newNode = new NodeDouble<>(data,size);
         newNode.setPrev(top);
         top = newNode;
         size++;

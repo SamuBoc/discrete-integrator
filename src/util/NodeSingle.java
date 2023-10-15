@@ -6,6 +6,7 @@ public class NodeSingle<T> implements Node<T> {
     /**
      * referencia para enlazar el siguiente
      */
+    private int id;
     private NodeSingle<T> next;
 
 
@@ -14,9 +15,10 @@ public class NodeSingle<T> implements Node<T> {
      * @param c es un objeto, el contenido del nodo
      */
 
-    public NodeSingle(T c) {
+    public NodeSingle(T c, int id) {
         content= c;
         next = null;
+        this.id=id;
     }
 
 
@@ -46,4 +48,20 @@ public class NodeSingle<T> implements Node<T> {
         return content.toString();
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public boolean hasNext(){
+
+        if(next.getContent()!=null)
+            return true;
+
+        return false;
+
+    }
 }

@@ -27,6 +27,12 @@ public class Item {
         }else{
             this.typeItem = TypeItem.reminder;
         }
+//diferenciador del tipo "NON_PIORITY(1)" y "PRIORITY(2)"
+        if(priorityLevel == 1){
+            this.priorityLevel = PriorityLevel.NOT_PRIORITY;
+        }else{
+            this.priorityLevel = PriorityLevel.PRIORITY;
+        }
 
     }
 
