@@ -68,9 +68,9 @@ public class Main {
         System.out.println("\n\nMenú de la aplicación, digite una opción\n" +
                         "(1) Agregar nuevo item \n" +
                         "(2) Ver lista \n" +
-                        "(3) Eliminar item" +
-                        "(4) Marcar item como completada" +
-                        "(5) Deshacer última acció" +
+                        "(3) Eliminar item \n" +
+                        "(4) Marcar item como completada \n" +
+                        "(5) Deshacer última acció \n" +
                         "(0)Sali");
         input = sc.nextInt();
         sc.nextLine();
@@ -83,8 +83,8 @@ public class Main {
         do {
             System.out.println("\nMenu de muestras de listas\n" +
                     "(1) Ver lista por fecha (Ascendente)\n" +
-                    "(2) Ver lista por nivel de prioridad \n \n" +
-                    "(3) Ver lista por subdivisiones \n \n" +
+                    "(2) Ver lista por nivel de prioridad \n" +
+                    "(3) Ver lista por subdivisiones \n" +
                     "(0)Salir");
             input = sc.nextInt();
             sc.nextLine();
@@ -226,7 +226,7 @@ public class Main {
     }
 
     public void deleteTask() {
-        System.out.println(showItems());
+        System.out.println(viewListDate());
         System.out.println("Ingrese el numero de subdivisión");
         int subDivision= sc.nextInt();
         System.out.println("Ingrese el numero de la lista de la subdivisión que escojió");

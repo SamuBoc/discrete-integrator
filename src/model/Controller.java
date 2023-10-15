@@ -104,11 +104,22 @@ private PriorityQueue<Item> itemPriorityQueueByPriority;
             ActionType actionType = lastAction.getActionType();
 
             switch (actionType) {
-                case ADD_TASK -> stackDelete(item);
-                case MODIFY_TASK -> stackModify(item);
-                case DELETE_TASK -> stackAdd(item);
+                case ADD_TASK:
+                    stackDelet(item);
+                    break;
+                case MODIFY_TASK:
+                    stackModify(item);
+                    break;
+                case DELETE_TASK:
+                    stackAdd(item);
+                    break;
             }
+
         }
+    }
+
+    private void stackDelet(Item item) {
+
     }
 
     //elimina el ultimo item agregado
@@ -137,6 +148,9 @@ private PriorityQueue<Item> itemPriorityQueueByPriority;
     //agrega el item, si la ultima accion fue eliminar
     private void stackAdd(Item item){
 
+        //searchItemToItem(hashPointer, linekdListPointer);
+
+
 
 
     }
@@ -158,9 +172,8 @@ private PriorityQueue<Item> itemPriorityQueueByPriority;
     public void deleteItem(int hashPointer, int linekdListPointer){
 
         Item currentItem = itemHashTable.search(hashPointer,linekdListPointer);
-        //FIXME Pense que ibas a crearle un enum de deleted a los Items, pero hiciste una clase Action que nose como funciona
-        //FIXME Haría esto yo pero no sé cómo si no tiene un enum que yo pueda modificar
-        //FIXME Con el modifyItem() tienes una idea de como lo puedes hacer, e implementas lo que creasete :D
+
+        itemHashTable.removeElement(currentItem.getName(), currentItem);
 
     }
 
@@ -183,6 +196,18 @@ private PriorityQueue<Item> itemPriorityQueueByPriority;
         return itemHashTable.showTable();
 
     }
+
+    public Boolean searchItemToItem(int hashPointer, int linekdListPointer){
+        Boolean out = true;
+
+        if(undoStack.isEmpty()){
+            itemHashTable.search(hashPointer,linekdListPointer);
+        }else{
+            out = false;
+        }
+        return out;
+    }
+
 
 
 }
